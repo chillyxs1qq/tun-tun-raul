@@ -3,15 +3,16 @@ import tkinter as tk
 # Crear ventana ahr
 ventana = tk.Tk()
 ventana.title("Sistema de Gestión de Biblioteca")
-ventana.geometry("450x400")
-ventana.configure(bg="#f0f0f1")
+ventana.geometry("550x500")
+ventana.configure(bg="#121212")  # Fondo negro elegante
 
 # Icono .ICO TUN TUN SAHUR XD
 #ventana.iconbitmap(r"C:\Users\joaca\OneDrive\Desktop\CERP\Segundo Semestre\Programacion II\PROYECTO FINAL\icono tun tun sahur\tun_tun_sahur.ico")
 
+
 # Formulario con grid
 # ID del libro (automático, no editable)
-tk.Label(ventana, text="ID del Libro:", font=("Arial", 12, "bold"), bg="#f0f0f0").grid(row=0, column=0, padx=10, pady=5, sticky="e")
+tk.Label(ventana, text="ID del Libro:", font=("Arial", 12, "bold"), bg="#121212", fg="#ffffff").grid(row=0, column=0, padx=10, pady=5, sticky="e")
 entrada_id = tk.Entry(ventana, width=5, font=("Arial", 12, "bold"), justify="center")  # más cuadrado y centrado
 entrada_id.insert(0, "1")  # por defecto empieza en 1
 entrada_id.config(state="readonly", readonlybackground="#d9edf7", fg="#31708f", bd=2)  # solo lectura con color
@@ -27,15 +28,20 @@ tk.Label(ventana, text="Descripción:", font=("Arial", 12, "bold"), bg="#f0f0f0"
 tk.Entry(ventana, width=30).grid(row=3, column=1, padx=10, pady=5)
 
 # Botones no toquen nada please
-tk.Button(ventana, text="Guardar Libro", bg="#4CAF50", fg="white", font=("Arial", 10, "bold"), width=15).grid(row=4, column=0, padx=10, pady=15)
-tk.Button(ventana, text="Limpiar Campos", bg="#2196F3", fg="white", font=("Arial", 10, "bold"), width=15).grid(row=4, column=1, padx=10, pady=15)
-tk.Button(ventana, text="Salir", bg="#f44336", fg="white", font=("Arial", 10, "bold"), width=15, command=ventana.destroy).grid(row=5, column=0, columnspan=2, pady=10)
+btn_style = {"font": ("Segoe UI", 11, "bold"), "width": 18, "bd": 0, "relief": "ridge", "cursor": "hand2"}
 
+tk.Button(ventana, text="Guardar Libro", bg="#4CAF50", fg="white", **btn_style).grid(row=4, column=0, padx=15, pady=15)
+tk.Button(ventana, text="Limpiar Campos", bg="#2196F3", fg="white", **btn_style).grid(row=4, column=1, padx=15, pady=15)
+tk.Button(ventana, text="Salir", bg="#f44336", fg="white", **btn_style, command=ventana.destroy).grid(row=5, column=0, columnspan=2, pady=12)
 # Etiqueta de mensaje
-tk.Label(ventana, text="¡Bienvenido al Sistema de Gestion Biblioteca!", font=("Arial", 10), bg="#f0f0f0", fg="green").grid(row=6, column=0, columnspan=2)
+tk.Label(ventana, text="¡Bienvenido al Sistema de Biblioteca!", font=("Segoe UI", 11, "italic"),
+         bg="#121212", fg="#00ff00").grid(row=6, column=0, columnspan=2, pady=6)
 
 # Listbox para mostrar libros /esto hay que ver /
-tk.Listbox(ventana, width=60, height=6).grid(row=7, column=0, columnspan=2, padx=10, pady=10)
+frame_listbox = tk.Frame(ventana, bg="#555555", bd=2, relief="sunken")
+frame_listbox.grid(row=7, column=0, columnspan=2, padx=15, pady=12)
+listbox_libros = tk.Listbox(frame_listbox, width=60, height=8, font=("Segoe UI", 11), bg="#1e1e1e", fg="#ffffff", bd=0, selectbackground="#4CAF50", selectforeground="#ffffff")
+listbox_libros.pack(padx=2, pady=2)
 
 # Centrar ventana
 ventana.update_idletasks()
