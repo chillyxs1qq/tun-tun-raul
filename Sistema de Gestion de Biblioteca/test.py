@@ -1,31 +1,45 @@
-#importar tkinter
 import tkinter as tk
-ventana = tk.Tk()
-ventana.title("Sistema de Gestion de Biblioteca")
-ventana.geometry("300x200")  # ancho x alto
 
-# 👇 Ruta completa al archivo .ico
+# Crear ventana ahr
+ventana = tk.Tk()
+ventana.title("Sistema de Gestión de Biblioteca")
+ventana.geometry("450x400")
+ventana.configure(bg="#f0f0f0")
+
+# Icono .ICO TUN TUN SAHUR XD
 ventana.iconbitmap(r"C:\Users\joaca\OneDrive\Desktop\CERP\Segundo Semestre\Programacion II\PROYECTO FINAL\icono tun tun sahur\tun_tun_sahur.ico")
 
-tk.Label(ventana, text="ID del Libro:").pack(pady=5)
-entrada_id = tk.Entry(ventana)
-entrada_id.pack(pady=5)
+# Formulario con grid
+tk.Label(ventana, text="ID del Libro:", font=("Arial", 12, "bold"), bg="#f0f0f0").grid(row=0, column=0, padx=10, pady=5, sticky="e")
+tk.Entry(ventana, width=30).grid(row=0, column=1, padx=10, pady=5)
 
-tk.Label(ventana, text="Título:").pack(pady=5)
-entrada_titulo = tk.Entry(ventana)
-entrada_titulo.pack(pady=5)
+tk.Label(ventana, text="Título:", font=("Arial", 12, "bold"), bg="#f0f0f0").grid(row=1, column=0, padx=10, pady=5, sticky="e")
+tk.Entry(ventana, width=30).grid(row=1, column=1, padx=10, pady=5)
 
-tk.Label(ventana, text="Autor:").pack(pady=5)
-entrada_autor = tk.Entry(ventana)
-entrada_autor.pack(pady=5)
+tk.Label(ventana, text="Autor:", font=("Arial", 12, "bold"), bg="#f0f0f0").grid(row=2, column=0, padx=10, pady=5, sticky="e")
+tk.Entry(ventana, width=30).grid(row=2, column=1, padx=10, pady=5)
 
-# Agregar un mensaje
-etiqueta = tk.Label(ventana, text="¡ABUELA XD QUE HACES?!")
-etiqueta.pack(pady=20)
+tk.Label(ventana, text="Descripción:", font=("Arial", 12, "bold"), bg="#f0f0f0").grid(row=3, column=0, padx=10, pady=5, sticky="e")
+tk.Entry(ventana, width=30).grid(row=3, column=1, padx=10, pady=5)
 
-# Botón para cerrar
-boton = tk.Button(ventana, text="FOCKING PANSA", command=ventana.destroy)
-boton.pack()
+# Botones no toquen nada please
+tk.Button(ventana, text="Guardar Libro", bg="#4CAF50", fg="white", font=("Arial", 10, "bold"), width=15).grid(row=4, column=0, padx=10, pady=15)
+tk.Button(ventana, text="Limpiar Campos", bg="#2196F3", fg="white", font=("Arial", 10, "bold"), width=15).grid(row=4, column=1, padx=10, pady=15)
+tk.Button(ventana, text="Salir", bg="#f44336", fg="white", font=("Arial", 10, "bold"), width=15, command=ventana.destroy).grid(row=5, column=0, columnspan=2, pady=10)
 
-# Iniciar bucle de la ventana
+# Etiqueta de mensaje
+tk.Label(ventana, text="¡Bienvenido al Sistema de Gestion Biblioteca!", font=("Arial", 10), bg="#f0f0f0", fg="green").grid(row=6, column=0, columnspan=2)
+
+# Listbox para mostrar libros /esto hay que ver /
+tk.Listbox(ventana, width=60, height=6).grid(row=7, column=0, columnspan=2, padx=10, pady=10)
+
+# Centrar ventana
+ventana.update_idletasks()
+ancho = ventana.winfo_width()
+alto = ventana.winfo_height()
+x = (ventana.winfo_screenwidth() // 2) - (ancho // 2)
+y = (ventana.winfo_screenheight() // 2) - (alto // 2)
+ventana.geometry(f"{ancho}x{alto}+{x}+{y}")
+
+# Iniciar ventana
 ventana.mainloop()
