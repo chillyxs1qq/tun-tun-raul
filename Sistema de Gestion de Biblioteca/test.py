@@ -4,10 +4,10 @@ import tkinter as tk
 ventana = tk.Tk()
 ventana.title("Sistema de Gestión de Biblioteca")
 ventana.geometry("450x400")
-ventana.configure(bg="#f0f0f0")
+ventana.configure(bg="#f0f0f1")
 
 # Icono .ICO TUN TUN SAHUR XD
-ventana.iconbitmap(r"C:\Users\joaca\OneDrive\Desktop\CERP\Segundo Semestre\Programacion II\PROYECTO FINAL\icono tun tun sahur\tun_tun_sahur.ico")
+#ventana.iconbitmap(r"C:\Users\joaca\OneDrive\Desktop\CERP\Segundo Semestre\Programacion II\PROYECTO FINAL\icono tun tun sahur\tun_tun_sahur.ico")
 
 # Formulario con grid
 # ID del libro (automático, no editable)
