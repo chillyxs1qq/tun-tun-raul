@@ -1,1 +1,1 @@
-la puta ma dre
+kill asdasd
