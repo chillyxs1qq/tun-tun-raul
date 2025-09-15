@@ -1,7 +1,7 @@
 from Sistema_de_Gestion_de_Biblioteca.models.Biblioteca.Libro import Libro
 
 class Material:
-    def __init__(self, idmaterial, titulo, autor, anio, ejemplarestotales=0, ejemplaresdisp=0, plazo=2, prestamohabilitado=False ):
+    def __init__(self, idmaterial, titulo, autor, anio):
         self.__idmaterial = idmaterial
         self.__titulo = titulo
         self.__autor = autor
