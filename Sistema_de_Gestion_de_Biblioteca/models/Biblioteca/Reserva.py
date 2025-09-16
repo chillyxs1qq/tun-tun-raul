@@ -9,5 +9,3 @@ class Reserva:
 
     def desencolar(self):
         self.__colaSocios.pop()
-
-    def siguiente(self):
