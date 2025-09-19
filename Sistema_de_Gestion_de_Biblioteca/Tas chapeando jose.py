@@ -1,1 +1,0 @@
-Jose chapea con cualquiera

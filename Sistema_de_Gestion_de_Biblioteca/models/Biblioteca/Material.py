@@ -1,9 +1,10 @@
 # Se crea la clase material que será la base para agregar Libros/Revistas/ETC...
 class Material:
-    def __init__(self,  idmaterial, tipo, titulo, autor, anio, plazo):
-        self.__idmaterial = idmaterial # Este ID deberá generarse automaticamente y será unico para cada material
+    __contador = 0
+    def __init__(self, tipo, titulo, autor, anio, plazo):
+        self.__idmaterial = self.__generarIDMa() # Este ID deberá generarse automáticamente y será unico para cada material
         self.__tipo = tipo # Necesario indicar el tipo antes de crear para saber si es Libro u otro tipo de material
-        self.__titulo = titulo # Pues aca va el titulo bro que esperabas
+        self.__titulo = titulo # Pues aca va el título bro que esperabas
         self.__autor = autor
         self.__anio = anio
         self.__ejemplarestotales = 0 #Ejemplares totales se declara 0 acá en el codigo, pero después hay q ver como calcular
@@ -11,14 +12,18 @@ class Material:
         self.__plazoprestamo = plazo #El plazo deberá indicarse en dias
         self.__prestamohabilitado = False #La habilitación se declara False pero luego hay que modificar al crear
 
-# Metodos get
+    #Genera un ID automatico cuando se crea una instancia de Material
+    def __generarIDMa(self):
+        return f"IDMA{self.__contador:04d}"
+
+    # Metodos get
     def getPlazoPrestamo(self):
         return self.__plazoprestamo #Este metodo sirve para ver cual es el plazo establecido para el material indicado
     #Este metodo podría ser eliminado en proximas versiones dependiendo de como hagamos la función del plazo
 
     def getInfo(self):
         if self.__prestamohabilitado is True:
-             hab = "Prestamo habilitado"
+            hab = "Prestamo habilitado"
         else:
             hab = "Prestamo no habilitado"
         return f"[Info-{self.__tipo}] Titulo: {self.__titulo}, Autor: {self.__autor}, Año: {self.__anio}, {hab}"
@@ -38,7 +43,7 @@ class Material:
         return self.__prestamohabilitado
     #Este metodo devuelve si el material tiene o no el prestamo habilitado con True o False
 
-# Metodos set (modificadores)
+    # Metodos set (modificadores)
 
     def setTitulo(self, titulo):
         self.__titulo = titulo
