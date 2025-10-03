@@ -55,7 +55,7 @@ class Prestamo:
         return f"|Prestamo: {self.__IDPrestamo}|Socio: {self.IDSocio}|Fecha del prestamo: {self.__fechaPrestamo}|Fecha de vencimiento: {self.__fechaVencimiento}|Estado: {self.__estado}|"
 
 # Crear un socio
-socio = Socio("Matheo", "Activo", "0902Matheo@gmail.com")
+socio = Socio("mogolico1", "Activo", "0902Matheo@gmail.com")
 
 # Crear un préstamo usando el ID del socio
 id_socio = socio.IDSocio

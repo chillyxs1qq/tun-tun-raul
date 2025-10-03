@@ -1,12 +1,14 @@
-from ..models.usuario import Usuario #importa la clase Usuario desde el archivo usuario.py que está en la carpeta models.
+from models.usuario import Usuario
+#importa la clase Usuario desde el archivo usuario.py que está en la carpeta models.
 #( va a dar error porque no pusimos nada todavia en usuario py xD )
 from datetime import datetime, timedelta #importa funciones de fechas y tiempos:
+
 
 class UsuarioService:
     def __init__(self):
         self.usuarios = [] #crea una lista privada usuarios que guardará los objetos Usuario
 
-    --- CRUD de usuarios ---
+    # --- CRUD de usuarios ---
     def agregar_usuario(self, id_usuario, nombre):
         if self.buscar_usuario_por_id(id_usuario): #si ya existe un usuario con ese ID devuelve un mensaje de error y no lo agrega
             return False  # ya existe
