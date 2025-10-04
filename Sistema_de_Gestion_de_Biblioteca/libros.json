@@ -1,6 +1,6 @@
 [
     {
-        "id": "FLAVIO0001",
+        "id": "IDMA0001",
         "titulo": "50 sombras de adrian",
         "autor": "jose",
         "anio": "2000",
@@ -8,7 +8,7 @@
         "prestamo": "Habilitado"
     },
     {
-        "id": "FLAVIO0002",
+        "id": "IDMA0002",
         "titulo": "pepe",
         "autor": "los sebollas",
         "anio": "2012",
@@ -16,11 +16,27 @@
         "prestamo": "Habilitado"
     },
     {
-        "id": "FLAVIO0003",
+        "id": "IDMA0003",
         "titulo": "JOSE",
         "autor": "GONZALES",
         "anio": "2002",
         "genero": "ayuda",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "IDMA0004",
+        "titulo": "LAS CRONICAS DE ALFREDITO",
+        "autor": "ALFREDITOGAMER",
+        "anio": 2009,
+        "genero": "ae",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "IDMA0005",
+        "titulo": "las aventuras de martin",
+        "autor": "bruno",
+        "anio": 2012,
+        "genero": "abentura",
         "prestamo": "Habilitado"
     }
 ]
