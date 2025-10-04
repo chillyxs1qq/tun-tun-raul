@@ -30,5 +30,13 @@
         "email": "sebolla@yahoo.com",
         "estado": "activo",
         "suspension_hasta": null
+    },
+    {
+        "id": 5,
+        "nombre": "Gonza",
+        "apellido": "Valdez",
+        "email": "mariososa@yahoo.com",
+        "estado": "activo",
+        "suspension_hasta": null
     }
 ]

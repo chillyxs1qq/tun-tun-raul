@@ -1,0 +1,26 @@
+[
+    {
+        "id": "FLAVIO0001",
+        "titulo": "50 sombras de adrian",
+        "autor": "jose",
+        "anio": "2000",
+        "genero": "terror",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "FLAVIO0002",
+        "titulo": "pepe",
+        "autor": "los sebollas",
+        "anio": "2012",
+        "genero": "martin",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "FLAVIO0003",
+        "titulo": "JOSE",
+        "autor": "GONZALES",
+        "anio": "2002",
+        "genero": "ayuda",
+        "prestamo": "Habilitado"
+    }
+]
