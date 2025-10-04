@@ -47,46 +47,56 @@ def main():
                     nombre = input("Nombre: ").strip()
                     apellido = input("Apellido: ").strip()
                     email = input("Email: ").strip()
-                    id_usuario = service_usuarios.obtener_siguiente_id()
-                    u = service_usuarios.agregar_usuario(id_usuario, nombre, apellido, email)
-                    print("Usuario creado:", u)
+                    u = service_usuarios.agregar_usuario(nombre, apellido, email)
+                    if u:
+                        print("Usuario creado:", u)
+                    else:
+                        print("No se pudo crear el usuario. Revise los datos.")
 
                 elif opt_u == "2":
-                    for u in service_usuarios.usuarios:
-                        print(u)
+                    if service_usuarios.usuarios:
+                        for u in service_usuarios.usuarios:
+                            print(u)
+                    else:
+                        print("No hay usuarios registrados.")
 
                 elif opt_u == "3":
                     nombre = input("Nombre a buscar: ").strip()
                     encontrados = service_usuarios.buscar_usuario_por_nombre(nombre)
-                    for u in encontrados:
-                        print(u)
+                    if encontrados:
+                        for u in encontrados:
+                            print(u)
+                    else:
+                        print("No se encontraron usuarios con ese nombre.")
 
                 elif opt_u == "4":
-                    id_u = int(input("ID: "))
+                    id_u = int(input("ID: ").strip())
                     u = service_usuarios.buscar_usuario_por_id(id_u)
                     print(u if u else "Usuario no encontrado")
 
                 elif opt_u == "5":
-                    id_u = int(input("ID a actualizar: "))
+                    id_u = int(input("ID a actualizar: ").strip())
                     usuario = service_usuarios.buscar_usuario_por_id(id_u)
                     if usuario:
-                        nombre = input("Nuevo nombre: ")
-                        apellido = input("Nuevo apellido: ")
-                        email = input("Nuevo email: ")
-                        service_usuarios.modificar_usuario(id_u, nombre, apellido, email)
-                        print("Usuario actualizado:", usuario)
+                        nombre = input("Nuevo nombre: ").strip()
+                        apellido = input("Nuevo apellido: ").strip()
+                        email = input("Nuevo email: ").strip()
+                        if service_usuarios.modificar_usuario(id_u, nombre, apellido, email):
+                            print("Usuario actualizado:", usuario)
+                        else:
+                            print("Error al actualizar usuario")
                     else:
                         print("Usuario no encontrado")
 
                 elif opt_u == "6":
-                    id_u = int(input("ID a eliminar: "))
+                    id_u = int(input("ID a eliminar: ").strip())
                     if service_usuarios.eliminar_usuario(id_u):
                         print("Usuario eliminado")
                     else:
                         print("No encontrado")
 
                 elif opt_u == "7":
-                    id_u = int(input("ID a suspender: "))
+                    id_u = int(input("ID a suspender: ").strip())
                     dias = int(input("Cantidad de días: "))
                     if service_usuarios.suspender_usuario(id_u, dias):
                         print("Usuario suspendido")
@@ -94,7 +104,7 @@ def main():
                         print("No encontrado")
 
                 elif opt_u == "8":
-                    id_u = int(input("ID a reactivar: "))
+                    id_u = int(input("ID a reactivar: ").strip())
                     if service_usuarios.reactivar_usuario(id_u):
                         print("Usuario reactivado")
                     else:
@@ -118,29 +128,38 @@ def main():
                     print("Libro agregado:", libro)
 
                 elif opt_l == "2":
-                    for l in service_libros.libros:
-                        print(l)
+                    if service_libros.libros:
+                        for l in service_libros.libros:
+                            print(l)
+                    else:
+                        print("No hay libros registrados.")
 
                 elif opt_l == "3":
                     titulo = input("Título a buscar: ").strip()
                     encontrados = service_libros.buscar_por_titulo(titulo)
-                    for l in encontrados:
-                        print(l)
+                    if encontrados:
+                        for l in encontrados:
+                            print(l)
+                    else:
+                        print("No se encontraron libros con ese título.")
 
                 elif opt_l == "4":
                     autor = input("Autor a buscar: ").strip()
                     encontrados = service_libros.buscar_por_autor(autor)
-                    for l in encontrados:
-                        print(l)
+                    if encontrados:
+                        for l in encontrados:
+                            print(l)
+                    else:
+                        print("No se encontraron libros de ese autor.")
 
                 elif opt_l == "5":
                     id_libro = input("ID del libro a modificar: ").strip()
                     libro = service_libros.buscar_por_id(id_libro)
                     if libro:
-                        titulo = input("Nuevo título: ")
-                        autor = input("Nuevo autor: ")
-                        anio = input("Nuevo año: ")
-                        genero = input("Nuevo género: ")
+                        titulo = input("Nuevo título: ").strip()
+                        autor = input("Nuevo autor: ").strip()
+                        anio = input("Nuevo año: ").strip()
+                        genero = input("Nuevo género: ").strip()
                         service_libros.modificar_libro(id_libro, titulo, autor, anio, genero)
                         print("Libro actualizado:", libro)
                     else:

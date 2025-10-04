@@ -1,14 +1,23 @@
+# services/LibroService.py
 import json
 from models.Biblioteca.Libro import Libro
+from utils.validation import validar_correo, validar_titulo, validar_autor, validar_anio
 
 class LibroService:
     def __init__(self):
-        self.libros = []  # lista de objetos Libro
-        self.cargar_desde_json()  # carga inicial
+        self.libros = []
+        self.cargar_desde_json()
 
     # --- CRUD ---
-    def agregar_libro(self, titulo, autor, anio, genero=None):
-        libro = Libro(titulo, autor, anio, genero)
+    def agregar_libro(self, titulo, autor, anio, genero=None, correo=None):
+        # Validaciones
+        titulo = validar_titulo(titulo)
+        autor = validar_autor(autor)
+        anio = validar_anio(anio)
+        if correo:
+            correo = validar_correo(correo)
+
+        libro = Libro(titulo, autor, anio, genero=genero, correo=correo)
         self.libros.append(libro)
         self.guardar_en_json()
         return libro
@@ -21,12 +30,20 @@ class LibroService:
             return True
         return False
 
-    def modificar_libro(self, id_libro, nuevo_titulo, nuevo_autor, nuevo_anio, nuevo_genero):
+    def modificar_libro(self, id_libro, nuevo_titulo, nuevo_autor, nuevo_anio, nuevo_genero, nuevo_correo=None):
         libro = self.buscar_por_id(id_libro)
         if libro:
+            # Validaciones
+            nuevo_titulo = validar_titulo(nuevo_titulo)
+            nuevo_autor = validar_autor(nuevo_autor)
+            nuevo_anio = validar_anio(nuevo_anio)
+            if nuevo_correo:
+                nuevo_correo = validar_correo(nuevo_correo)
+
             libro.setTitulo(nuevo_titulo)
             libro.setAutor(nuevo_autor)
             libro.setGenero(nuevo_genero)
+            libro.setCorreo(nuevo_correo)
             self.guardar_en_json()
             return True
         return False
@@ -54,6 +71,7 @@ class LibroService:
                 "autor": l.getAutor(),
                 "anio": l.getAnio(),
                 "genero": l.getGenero(),
+                "correo": l.getCorreo(),
                 "prestamo": l.getPrestamohabilitado()
             })
         with open("libros.json", "w", encoding="utf-8") as f:
@@ -64,7 +82,13 @@ class LibroService:
             with open("libros.json", "r", encoding="utf-8") as f:
                 lista_dicts = json.load(f)
                 for d in lista_dicts:
-                    libro = Libro(d["titulo"], d["autor"], d["anio"], d["genero"])
+                    libro = Libro(
+                        d["titulo"],
+                        d["autor"],
+                        d["anio"],
+                        genero=d.get("genero"),
+                        correo=d.get("correo")
+                    )
                     self.libros.append(libro)
         except FileNotFoundError:
             pass

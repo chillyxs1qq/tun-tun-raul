@@ -1,13 +1,5 @@
 [
     {
-        "id": 1,
-        "nombre": "asd",
-        "apellido": "ksad",
-        "email": "gey@hgey",
-        "estado": "suspendido",
-        "suspension_hasta": "2025-10-23T22:05:29.508381"
-    },
-    {
         "id": 2,
         "nombre": "jose",
         "apellido": "gonzales",
@@ -36,6 +28,30 @@
         "nombre": "Gonza",
         "apellido": "Valdez",
         "email": "mariososa@yahoo.com",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 6,
+        "nombre": "Martin",
+        "apellido": "Branca",
+        "email": "ladeepweb@hot.com",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 7,
+        "nombre": "nemesis",
+        "apellido": "gularte",
+        "email": "asdad@asdasd.net",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 8,
+        "nombre": "prueba1",
+        "apellido": "sebolla",
+        "email": "asdasdasd",
         "estado": "activo",
         "suspension_hasta": null
     }
