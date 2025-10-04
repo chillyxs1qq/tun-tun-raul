@@ -1,7 +1,6 @@
 from models.usuario import Usuario
 from services.usuariosService import UsuarioService
 
-
 def print_menu():
     print("\n=== Menú de Usuario ===")
     print("1) Crear usuario")
@@ -10,10 +9,9 @@ def print_menu():
     print("4) Obtener por ID")
     print("5) Actualizar por ID")
     print("6) Eliminar por ID")
-    print("7) Exportar a JSON")
-    print("8) Importar desde JSON")
+    print("7) Suspender usuario")
+    print("8) Reactivar usuario")
     print("0) Salir")
-
 
 def main():
     service = UsuarioService()
@@ -25,54 +23,90 @@ def main():
             nombre = input("Nombre: ").strip()
             apellido = input("Apellido: ").strip()
             email = input("Email: ").strip()
-            try:
-                u = service.create_user(nombre, apellido, email)
-                print("Creado:", u)
-            except ValueError as e:
-                print("Error:", e)
+            id_usuario = service.obtener_siguiente_id()
+            u = service.agregar_usuario(id_usuario, nombre, apellido, email)
+            if u:
+                print(f"Usuario creado con ID {id_usuario}: {nombre} {apellido} ({email})")
+            else:
+                print("Error: Ya existe un usuario con ese ID.")
 
         elif opt == "2":
-            usuarios = service.get_all_users()
-            for u in usuarios:
-                print(u)
+            usuarios = service.usuarios
+            if usuarios:
+                for u in usuarios:
+                    print(u)
+            else:
+                print("No hay usuarios registrados.")
 
         elif opt == "3":
             nombre = input("Ingrese nombre a buscar: ").strip()
-            encontrados = service.find_by_name(nombre)
-            for u in encontrados:
-                print(u)
+            encontrados = service.buscar_usuario_por_nombre(nombre)
+            if encontrados:
+                for u in encontrados:
+                    print(u)
+            else:
+                print("No se encontraron usuarios.")
 
         elif opt == "4":
             try:
                 id_u = int(input("Ingrese ID: "))
-                u = service.get_user_by_id(id_u)
-                print(u)
-            except Exception as e:
-                print("Error:", e)
+                u = service.buscar_usuario_por_id(id_u)
+                if u:
+                    print(u)
+                else:
+                    print("Usuario no encontrado.")
+            except:
+                print("ID inválido.")
 
         elif opt == "5":
             try:
                 id_u = int(input("ID a actualizar: "))
-                nombre = input("Nuevo nombre: ")
-                apellido = input("Nuevo apellido: ")
-                email = input("Nuevo email: ")
-                u = service.update_user(id_u, nombre, apellido, email)
-                print("Actualizado:", u)
-            except Exception as e:
-                print("Error:", e)
+                usuario = service.buscar_usuario_por_id(id_u)
+                if usuario:
+                    nombre = input("Nuevo nombre: ")
+                    apellido = input("Nuevo apellido: ")
+                    email = input("Nuevo email: ")
+                    service.modificar_usuario(id_u, nombre, apellido, email)
+                    print("Usuario actualizado:", usuario)
+                else:
+                    print("Usuario no encontrado.")
+            except:
+                print("ID inválido.")
 
         elif opt == "6":
             try:
                 id_u = int(input("ID a eliminar: "))
-                service.delete_user(id_u)
-                print("Usuario eliminado.")
-            except Exception as e:
-                print("Error:", e)
+                if service.eliminar_usuario(id_u):
+                    print("Usuario eliminado.")
+                else:
+                    print("Usuario no encontrado.")
+            except:
+                print("ID inválido.")
+
+        elif opt == "7":
+            try:
+                id_u = int(input("ID a suspender: "))
+                dias = int(input("Cantidad de días: "))
+                if service.suspender_usuario(id_u, dias):
+                    print(f"Usuario suspendido por {dias} días.")
+                else:
+                    print("Usuario no encontrado o ya suspendido.")
+            except:
+                print("Entrada inválida.")
+
+        elif opt == "8":
+            try:
+                id_u = int(input("ID a reactivar: "))
+                if service.reactivar_usuario(id_u):
+                    print("Usuario reactivado.")
+                else:
+                    print("Usuario no encontrado o no está suspendido.")
+            except:
+                print("ID inválido.")
 
         elif opt == "0":
             print("Saliendo...")
             break
-
 
 if __name__ == "__main__":
     main()
