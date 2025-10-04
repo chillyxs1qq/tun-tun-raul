@@ -12,6 +12,22 @@
         "nombre": "jose",
         "apellido": "gonzales",
         "email": "hot@gonzales.com",
+        "estado": "suspendido",
+        "suspension_hasta": "2025-11-02T22:13:57.736563"
+    },
+    {
+        "id": 3,
+        "nombre": "gey",
+        "apellido": "bruno",
+        "email": "hot@bruno12",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 4,
+        "nombre": "don pepe sebolla",
+        "apellido": "los sebollas",
+        "email": "sebolla@yahoo.com",
         "estado": "activo",
         "suspension_hasta": null
     }

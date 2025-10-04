@@ -1,19 +1,25 @@
-# Se crea la clase material que será la base para agregar Libros/Revistas/ETC...
 class Material:
-    __contador = 0
+    __contador = 0  # contador de IDs
+
     def __init__(self, tipo, titulo, autor, anio):
-        self.__id = self.__generarIDMa() # Este ID deberá generarse automáticamente y será unico para cada material
-        self.__tipo = tipo # Necesario indicar el tipo antes de crear para saber si es Libro u otro tipo de material
-        self.__titulo = titulo # Pues aca va el título bro que esperabas
+        Material.__contador += 1
+        self.__id = self.__generarIDMa()
+        self.__tipo = tipo
+        self.__titulo = titulo
         self.__autor = autor
         self.__anio = anio
-        self.__prestamohabilitado = True #La habilitación se declara False pero luego hay que modificar al crear
+        self.__prestamohabilitado = True
 
-    #Genera un ID automatico cuando se crea una instancia de Material
     def __generarIDMa(self):
         return f"IDMA{self.__contador:04d}"
 
-    # Gets
+    # -------- Getters --------
+    def getId(self):
+        return self.__id  # <- Esto es lo que faltaba
+
+    def getTipo(self):
+        return self.__tipo
+
     def getTitulo(self):
         return self.__titulo
 
@@ -24,27 +30,15 @@ class Material:
         return self.__anio
 
     def getPrestamohabilitado(self):
-        if self.__prestamohabilitado == True:
-            estado = "Habilitado"
-        else:
-            estado = "Inhabilitado"
-        return f"{estado}"
+        return "Habilitado" if self.__prestamohabilitado else "Inhabilitado"
 
-
-    # Sets
-
+    # -------- Setters --------
     def setTitulo(self, titulo):
-        self.__titulo = titulo #Este metodo sirve para cambiar el titulo de un material
+        self.__titulo = titulo
 
     def setAutor(self, autor):
-        self.__autor = autor    #Lo mismo que el anterior pero para el Autor
+        self.__autor = autor
 
-    # Metodos
-
+    # -------- __str__ --------
     def __str__(self):
-        if self.__prestamohabilitado == True:
-            estado = "Habilitado"
-        else:
-            estado = "Inhabilitado"
-        return f"[{self.__tipo}] Titulo: {self.__titulo}, Autor: {self.__autor}, Anio: {self.__anio}, Prestamo: {estado}"
-    #Este metodo sirve para ver en pantalla la información del material, y el IF lo que hace es cambiar el Valor de la ultima variable para saber si está o no habilitado su prestamo
+        return f"[{self.__tipo}] ID: {self.__id}, Título: {self.__titulo}, Autor: {self.__autor}, Año: {self.__anio}, Préstamo: {self.getPrestamohabilitado()}"
