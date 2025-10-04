@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "nombre": "asd",
+        "apellido": "ksad",
+        "email": "gey@hgey",
+        "estado": "suspendido",
+        "suspension_hasta": "2025-10-23T22:05:29.508381"
+    },
+    {
+        "id": 2,
+        "nombre": "jose",
+        "apellido": "gonzales",
+        "email": "hot@gonzales.com",
+        "estado": "activo",
+        "suspension_hasta": null
+    }
+]
