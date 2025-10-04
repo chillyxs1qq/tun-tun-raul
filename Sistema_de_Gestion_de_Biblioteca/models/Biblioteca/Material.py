@@ -14,6 +14,22 @@ class Material:
         return f"IDMA{self.__contador:04d}"
 
     # Gets
+    def getTitulo(self):
+        return self.__titulo
+
+    def getAutor(self):
+        return self.__autor
+
+    def getAnio(self):
+        return self.__anio
+
+    def getPrestamohabilitado(self):
+        if self.__prestamohabilitado == True:
+            estado = "Habilitado"
+        else:
+            estado = "Inhabilitado"
+        return f"{estado}"
+
 
     # Sets
 
