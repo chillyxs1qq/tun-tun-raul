@@ -47,10 +47,20 @@ class LibroService:
         return None
 
     def buscar_por_titulo(self, titulo):
-        return [l for l in self.libros if titulo.lower() in l.getTitulo().lower()]
+        titulo = titulo.strip().lower()
+        resultados = []
+        for l in self.libros:
+            if titulo in l.getTitulo().strip().lower():
+                resultados.append(l)
+        return resultados
 
     def buscar_por_autor(self, autor):
-        return [l for l in self.libros if autor.lower() in l.getAutor().lower()]
+        autor = autor.strip().lower()
+        resultados = []
+        for l in self.libros:
+            if autor in l.getAutor().strip().lower():
+                resultados.append(l)
+        return resultados
 
     # --- JSON ---
     def guardar_en_json(self):

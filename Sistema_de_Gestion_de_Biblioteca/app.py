@@ -1,10 +1,14 @@
 from services.usuariosService import UsuarioService
 from services.LibroService import LibroService
+from services.PrestamoService import PrestamoService  # 🔹 Nuevo import
+
+# ------------------ MENÚS ------------------
 
 def print_menu():
     print("\n=== Menú Principal ===")
     print("1) Gestión de usuarios")
     print("2) Gestión de libros")
+    print("3) Gestión de préstamos")  # 🔹 Nueva opción
     print("0) Salir")
 
 def print_menu_usuarios():
@@ -29,9 +33,21 @@ def print_menu_libros():
     print("6) Eliminar libro")
     print("0) Volver")
 
+def print_menu_prestamos():
+    print("\n=== Menú de Préstamos ===")
+    print("1) Crear préstamo")
+    print("2) Listar préstamos")
+    print("3) Marcar devolución")
+    print("4) Calcular sanción")
+    print("5) Ver colas de espera")
+    print("0) Volver")
+
+# ------------------ PROGRAMA PRINCIPAL ------------------
+
 def main():
     service_usuarios = UsuarioService()
     service_libros = LibroService()
+    service_prestamos = PrestamoService(service_usuarios, service_libros)  # 🔹 Instancia
 
     while True:
         print_menu()
@@ -59,10 +75,11 @@ def main():
                     nombre = input("Nombre a buscar: ").strip()
                     encontrados = service_usuarios.buscar_usuario_por_nombre(nombre)
                     if encontrados:
+                        print("\nUsuarios encontrados:")
                         for u in encontrados:
                             print(u)
                     else:
-                        print("No se encontraron usuarios con ese nombre.")
+                        print("No se encontraron usuarios con ese nombre o parte del nombre.")
 
                 elif opt_u == "4":
                     id_u = int(input("ID: "))
@@ -121,20 +138,32 @@ def main():
                     print("Libro agregado:", libro)
 
                 elif opt_l == "2":
-                    for l in service_libros.libros:
-                        print(l)
+                    if service_libros.libros:
+                        print("\nLista de libros:")
+                        for l in service_libros.libros:
+                            print(l)
+                    else:
+                        print("No hay libros registrados.")
 
                 elif opt_l == "3":
-                    titulo = input("Título a buscar: ").strip()
+                    titulo = input("Título (o parte del título) a buscar: ").strip()
                     encontrados = service_libros.buscar_por_titulo(titulo)
-                    for l in encontrados:
-                        print(l)
+                    if encontrados:
+                        print("\nLibros encontrados:")
+                        for l in encontrados:
+                            print(l)
+                    else:
+                        print("No se encontraron libros con ese título o parte del título.")
 
                 elif opt_l == "4":
-                    autor = input("Autor a buscar: ").strip()
+                    autor = input("Autor (o parte del autor) a buscar: ").strip()
                     encontrados = service_libros.buscar_por_autor(autor)
-                    for l in encontrados:
-                        print(l)
+                    if encontrados:
+                        print("\nLibros encontrados:")
+                        for l in encontrados:
+                            print(l)
+                    else:
+                        print("No se encontraron libros con ese autor o parte del autor.")
 
                 elif opt_l == "5":
                     id_libro = input("ID del libro a modificar: ").strip()
@@ -159,9 +188,50 @@ def main():
                 elif opt_l == "0":
                     break
 
+        # ---------- Gestión de préstamos ----------
+        elif opt == "3":
+            while True:
+                print_menu_prestamos()
+                opt_p = input("Opción: ").strip()
+
+                if opt_p == "1":
+                    id_usuario = input("ID del usuario: ").strip()
+                    id_libro = input("ID del libro: ").strip()
+                    dias = int(input("Días de préstamo (por defecto 7): ") or "7")
+                    print(service_prestamos.crear_prestamo(id_usuario, id_libro, dias))
+
+                elif opt_p == "2":
+                    prestamos = service_prestamos.listar_prestamos()
+                    if prestamos:
+                        for p in prestamos:
+                            print(p)
+                    else:
+                        print("No hay préstamos registrados.")
+
+                elif opt_p == "3":
+                    id_prestamo = input("ID del préstamo a marcar como devuelto: ").strip()
+                    print(service_prestamos.marcar_devuelto(id_prestamo))
+
+                elif opt_p == "4":
+                    id_prestamo = input("ID del préstamo: ").strip()
+                    print(service_prestamos.calcular_sancion(id_prestamo))
+
+                elif opt_p == "5":
+                    print("\n=== Colas de espera activas ===")
+                    if service_prestamos.cola_espera:
+                        for id_libro, cola in service_prestamos.cola_espera.items():
+                            if not cola.estaVacia():
+                                print(f"Libro {id_libro}: en espera -> {cola.toLista()}")
+                    else:
+                        print("No hay colas de espera activas.")
+
+                elif opt_p == "0":
+                    break
+
         elif opt == "0":
             print("Saliendo...")
             break
+
 
 if __name__ == "__main__":
     main()

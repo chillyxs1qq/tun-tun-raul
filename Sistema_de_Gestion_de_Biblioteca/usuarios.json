@@ -62,5 +62,13 @@
         "email": "gordofobia@yahoo.com",
         "estado": "activo",
         "suspension_hasta": null
+    },
+    {
+        "id": 10,
+        "nombre": "MOGOLICO1",
+        "apellido": "ayer",
+        "email": "joacaba@yahoo.net",
+        "estado": "activo",
+        "suspension_hasta": null
     }
 ]
