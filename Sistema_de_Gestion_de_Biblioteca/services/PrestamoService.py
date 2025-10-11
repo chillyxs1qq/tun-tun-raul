@@ -17,17 +17,17 @@ class PrestamoService:
         try:
             id_usuario = int(id_usuario)
         except ValueError:
-            return "❌ ID de usuario inválido."
+            return "ID de usuario inválido."
 
         usuario = self.service_usuarios.buscar_usuario_por_id(id_usuario)
         libro = self.service_libros.buscar_por_id(id_libro)
 
         if not usuario:
-            return "❌ Usuario no encontrado."
+            return "Usuario no encontrado."
         if not libro:
-            return "❌ Libro no encontrado."
+            return "Libro no encontrado."
         if usuario.getEstado() == "suspendido":
-            return f"❌ Usuario suspendido hasta {usuario.getSuspensionHasta()}"
+            return f"Usuario suspendido hasta {usuario.getSuspensionHasta()}"
 
         # Ver si el libro ya está prestado
         prestado = any(p.id_libro == id_libro and not p.devuelto for p in self.prestamos)
@@ -36,13 +36,13 @@ class PrestamoService:
             if id_libro not in self.cola_espera:
                 self.cola_espera[id_libro] = Cola()
             self.cola_espera[id_libro].encolar(id_usuario)
-            return f"📚 Libro ya prestado. Usuario {id_usuario} agregado a la cola de espera."
+            return f"Libro ya prestado. Usuario {id_usuario} agregado a la cola de espera."
 
         # Crear préstamo normal
         prestamo = Prestamo(id_usuario, id_libro, dias_prestamo)
         self.prestamos.append(prestamo)
         self.guardar_en_json()
-        return f"✅ Préstamo creado: {prestamo}"
+        return f"Préstamo creado: {prestamo}"
 
     # --- Listar préstamos ---
     def listar_prestamos(self):
@@ -59,9 +59,9 @@ class PrestamoService:
     def marcar_devuelto(self, id_prestamo):
         prestamo = self.buscar_por_id(id_prestamo)
         if not prestamo:
-            return "❌ Préstamo no encontrado."
+            return "Préstamo no encontrado."
         if prestamo.devuelto:
-            return "✅ Ya estaba devuelto."
+            return "Ya estaba devuelto."
 
         prestamo.marcar_devuelto()
         self.guardar_en_json()
@@ -70,15 +70,15 @@ class PrestamoService:
         if prestamo.id_libro in self.cola_espera and not self.cola_espera[prestamo.id_libro].estaVacia():
             siguiente_usuario = self.cola_espera[prestamo.id_libro].desencolar()
             self.crear_prestamo(siguiente_usuario, prestamo.id_libro)
-            return f"✅ Libro devuelto. Nuevo préstamo automático para el usuario {siguiente_usuario}."
+            return f"Libro devuelto. Nuevo préstamo automático para el usuario {siguiente_usuario}."
 
-        return "✅ Libro devuelto correctamente."
+        return "Libro devuelto correctamente."
 
     # --- Calcular sanción ---
     def calcular_sancion(self, id_prestamo):
         prestamo = self.buscar_por_id(id_prestamo)
         if not prestamo:
-            return "❌ Préstamo no encontrado."
+            return "Préstamo no encontrado."
         sancion = prestamo.calcular_sancion()
         return f"Sanción actual: ${sancion}"
 
@@ -95,12 +95,12 @@ class PrestamoService:
                 "devuelto": p.devuelto,
                 "sancion": p.sancion
             })
-        with open("prestamos.json", "w", encoding="utf-8") as f:
+        with open("data/prestamos.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
     def cargar_desde_json(self):
         try:
-            with open("prestamos.json", "r", encoding="utf-8") as f:
+            with open("data/prestamos.json", "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for d in data:
                     fecha_inicio = datetime.strptime(d["fecha_inicio"], "%Y-%m-%d").date()
