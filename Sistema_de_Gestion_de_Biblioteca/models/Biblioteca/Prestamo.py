@@ -1,68 +1,27 @@
-from Socio import Socio
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 class Prestamo:
+    def __init__(self, id_prestamo, id_usuario, id_libro, fecha_inicio=None, dias_prestamo=7):
+        self.id_prestamo = id_prestamo
+        self.id_usuario = id_usuario
+        self.id_libro = id_libro
+        self.fecha_inicio = fecha_inicio or datetime.today()
+        self.fecha_devolucion = self.fecha_inicio + timedelta(days=dias_prestamo)
+        self.devuelto = False
+        self.sancion = 0
 
-    #Diccionario de Préstamos:
-    __Prestamos = {}
+    def marcar_devuelto(self):
+        self.devuelto = True
 
-    #Contador de préstamos:
-    __prestamos = 0
-
-
-    def __init__(self, SocioID, IDMaterial, estado = "Vigente"):
-
-        #El ID de los préstamos se crean automáticamente cada vez que se registra un nuevo Prestamo.
-        self.__IDPrestamo = self.__generarIDPrestamo()
-
-        #Los préstamos que se realicen se guardan en el diccionario de préstamos
-        self.__Prestamos[self.__IDPrestamo] = self
-
-        #Acepta tanto un objeto Socio como un ID de Socio.
-        if isinstance(SocioID, Socio):
-            self.__Socio = SocioID
-        else:
-            #Si es un ID, busca al Socio correspondiente.
-            self.__Socio = Socio.buscarID(SocioID)
-            if self.__Socio is None:
-                raise ValueError(f"No hay un Socio con el ID: {SocioID}")
-
-        self.__IDMaterial = IDMaterial
-
-        self.__estado = estado
-
-        #Utilizamos la biblioteca datetime para que cuando se haga un prestamo automáticamente se ponga la fecha actual.
-        #Las especificación .now() sirve para que me de la fecha actual. Y .date() para quitar horas, minutos y segundo.
-        self.__fechaPrestamo = datetime.now().date()
-
-        #Con timedelta podemos especificar una cantidad de días en específico y sumarlo a la actual.
-        #Fecha de vencimiento se crea automáticamente sumando una cantidad de días específica para devolver el prestamo.
-        self.__fechaVencimiento = self.__fechaPrestamo + timedelta(days=7)
-
-    @property
-    def IDSocio(self):
-        return self.__Socio.IDSocio
-
-    @property
-    def Socio(self):
-        return self.__Socio
-
-    def __generarIDPrestamo(self):
-        Prestamo.__prestamos += 1
-        return f"PR{self.__prestamos:04d}"
+    def calcular_sancion(self):
+        if not self.devuelto:
+            hoy = datetime.today()
+            if hoy > self.fecha_devolucion:
+                dias_retraso = (hoy - self.fecha_devolucion).days
+                self.sancion = dias_retraso * 5  # $5 por día de retraso
+        return self.sancion
 
     def __str__(self):
-        return f"|Prestamo: {self.__IDPrestamo}|Socio: {self.IDSocio}|Fecha del prestamo: {self.__fechaPrestamo}|Fecha de vencimiento: {self.__fechaVencimiento}|Estado: {self.__estado}|"
-
-# Crear un socio
-socio = Socio("mogolico1", "Activo", "0902Matheo@gmail.com")
-
-# Crear un préstamo usando el ID del socio
-id_socio = socio.IDSocio
-prestamo1 = Prestamo( id_socio, "M002")
-
-# Obtener toda la información del socio
-print(prestamo1) # Mostrará todos los datos del socio
-
-#Mostramos la información del Socio
-print(socio)
+        estado = "Devuelto" if self.devuelto else "Pendiente"
+        return (f"[{self.id_prestamo}] Usuario: {self.id_usuario} | Libro: {self.id_libro} | "
+                f"Fecha límite: {self.fecha_devolucion.date()} | Estado: {estado} | Sanción: ${self.sancion}")

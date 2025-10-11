@@ -38,5 +38,13 @@
         "anio": 2012,
         "genero": "abentura",
         "prestamo": "Habilitado"
+    },
+    {
+        "id": "IDMA0006",
+        "titulo": "12 sombras de Martin",
+        "autor": "Martin Branca",
+        "anio": 2004,
+        "genero": "Gey",
+        "prestamo": "Habilitado"
     }
 ]
