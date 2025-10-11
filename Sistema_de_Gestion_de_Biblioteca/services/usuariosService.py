@@ -92,12 +92,12 @@ class UsuarioService:
                 "estado": u.getEstado(),
                 "suspension_hasta": u.getSuspensionHasta().isoformat() if u.getSuspensionHasta() else None
             })
-        with open("usuarios.json", "w", encoding="utf-8") as f:
+        with open("data/usuarios.json", "w", encoding="utf-8") as f:
             json.dump(lista_dicts, f, indent=4)
 
     def cargar_desde_json(self):
         try:
-            with open("usuarios.json", "r", encoding="utf-8") as f:
+            with open("data/usuarios.json", "r", encoding="utf-8") as f:
                 lista_dicts = json.load(f)
                 for u_dict in lista_dicts:
                     id_usuario = int(u_dict["id"])
