@@ -74,12 +74,12 @@ class LibroService:
                 "genero": l.getGenero(),
                 "prestamo": l.getPrestamohabilitado()
             })
-        with open("libros.json", "w", encoding="utf-8") as f:
+        with open("data/libros.json", "w", encoding="utf-8") as f:
             json.dump(lista_dicts, f, indent=4)
 
     def cargar_desde_json(self):
         try:
-            with open("libros.json", "r", encoding="utf-8") as f:
+            with open("data/libros.json", "r", encoding="utf-8") as f:
                 lista_dicts = json.load(f)
                 for d in lista_dicts:
                     libro = Libro(
