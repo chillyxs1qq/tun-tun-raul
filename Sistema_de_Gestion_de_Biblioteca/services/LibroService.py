@@ -39,12 +39,13 @@ class LibroService:
             return True
         return False
 
-    # --- Búsquedas ---
     def buscar_por_id(self, id_libro):
+        id_libro = id_libro.upper()
         for l in self.libros:
-            if l.getId() == id_libro:
+            if l.getId().upper() == id_libro:
                 return l
         return None
+
 
     def buscar_por_titulo(self, titulo):
         titulo = titulo.strip().lower()

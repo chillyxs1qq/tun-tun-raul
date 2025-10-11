@@ -1,0 +1,20 @@
+[
+    {
+        "id_prestamo": "PRE0001",
+        "id_usuario": 3,
+        "id_libro": "IDMA0003",
+        "fecha_inicio": "2025-10-10",
+        "fecha_devolucion": "2025-10-17",
+        "devuelto": true,
+        "sancion": 0
+    },
+    {
+        "id_prestamo": "PRE0002",
+        "id_usuario": 4,
+        "id_libro": "IDMA0004",
+        "fecha_inicio": "2025-10-10",
+        "fecha_devolucion": "2025-10-17",
+        "devuelto": false,
+        "sancion": 0
+    }
+]

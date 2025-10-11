@@ -16,7 +16,12 @@ class UsuarioService:
 
     # --- CRUD ---
     def agregar_usuario(self, id_usuario, nombre, apellido, email):
-        nuevo = Usuario(id_usuario, nombre, apellido, email)
+        # Si email es vacío o inválido, lo dejamos como None
+        if not email or not Usuario._Usuario__email_valido(email):
+            email = None
+        nuevo = Usuario(nombre, apellido, email)
+        # Sobrescribimos el ID automático para usar el que pasamos
+        nuevo._Usuario__id = id_usuario
         self.usuarios.append(nuevo)
         self.guardar_en_json()
         return nuevo
@@ -34,7 +39,8 @@ class UsuarioService:
         if usuario:
             usuario.setNombre(nuevo_nombre)
             usuario.setApellido(nuevo_apellido)
-            usuario.setEmail(nuevo_email)
+            if nuevo_email and Usuario._Usuario__email_valido(nuevo_email):
+                usuario.setEmail(nuevo_email)
             self.guardar_en_json()
             return True
         return False
@@ -95,17 +101,27 @@ class UsuarioService:
                 lista_dicts = json.load(f)
                 for u_dict in lista_dicts:
                     id_usuario = int(u_dict["id"])
-                    u = Usuario(
-                        id_usuario,
-                        u_dict["nombre"],
-                        u_dict["apellido"],
-                        u_dict["email"]
-                    )
+                    nombre = u_dict.get("nombre", "").strip()
+                    apellido = u_dict.get("apellido", "").strip()
+                    email = u_dict.get("email")
+                    # Validar email, si es inválido lo ponemos en None
+                    if not email or not Usuario._Usuario__email_valido(email):
+                        email = None
+
+                    # Crear el usuario usando la clase Usuario
+                    u = Usuario(nombre, apellido, email)
+
+                    # Sobrescribimos el ID con el del JSON
+                    u._Usuario__id = id_usuario
+
+                    # Restaurar estado y suspensión
                     u.setEstado(u_dict.get("estado", "activo"))
                     suspension = u_dict.get("suspension_hasta")
                     if suspension:
                         u.setSuspensionHasta(datetime.fromisoformat(suspension))
+
                     self.usuarios.append(u)
+
                 # Actualizar el próximo ID
                 if self.usuarios:
                     self._next_id = max(u.getId() for u in self.usuarios) + 1

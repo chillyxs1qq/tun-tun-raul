@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from models.Biblioteca.Prestamo import Prestamo
 from services.Cola import Cola
 
@@ -41,7 +41,6 @@ class PrestamoService:
         # Crear préstamo normal
         prestamo = Prestamo(id_usuario, id_libro, dias_prestamo)
         self.prestamos.append(prestamo)
-        self._next_id += 1
         self.guardar_en_json()
         return f"✅ Préstamo creado: {prestamo}"
 
@@ -91,9 +90,10 @@ class PrestamoService:
                 "id_prestamo": p.id_prestamo,
                 "id_usuario": p.id_usuario,
                 "id_libro": p.id_libro,
-                "fecha_prestamo": p.fecha_prestamo.strftime("%Y-%m-%d"),
+                "fecha_inicio": p.fecha_inicio.strftime("%Y-%m-%d"),
                 "fecha_devolucion": p.fecha_devolucion.strftime("%Y-%m-%d"),
-                "devuelto": p.devuelto
+                "devuelto": p.devuelto,
+                "sancion": p.sancion
             })
         with open("prestamos.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
@@ -103,11 +103,14 @@ class PrestamoService:
             with open("prestamos.json", "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for d in data:
-                    prestamo = Prestamo(d["id_usuario"], d["id_libro"])
+                    fecha_inicio = datetime.strptime(d["fecha_inicio"], "%Y-%m-%d").date()
+                    dias_prestamo = (datetime.strptime(d["fecha_devolucion"], "%Y-%m-%d").date() - fecha_inicio).days
+                    prestamo = Prestamo(d["id_usuario"], d["id_libro"], dias_prestamo)
                     prestamo.id_prestamo = d["id_prestamo"]
-                    prestamo.fecha_prestamo = datetime.strptime(d["fecha_prestamo"], "%Y-%m-%d")
-                    prestamo.fecha_devolucion = datetime.strptime(d["fecha_devolucion"], "%Y-%m-%d")
                     prestamo.devuelto = d["devuelto"]
+                    prestamo.sancion = d.get("sancion", 0)
+                    prestamo.fecha_inicio = fecha_inicio
+                    prestamo.fecha_devolucion = datetime.strptime(d["fecha_devolucion"], "%Y-%m-%d").date()
                     self.prestamos.append(prestamo)
                 self._next_id = len(self.prestamos) + 1
         except FileNotFoundError:
