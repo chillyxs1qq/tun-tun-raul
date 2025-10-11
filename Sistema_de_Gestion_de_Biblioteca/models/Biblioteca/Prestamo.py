@@ -1,5 +1,8 @@
-from Socio import Socio
+#Prestamos
+from Estudiante import Estudiante
+from Material import Material
 from datetime import date, datetime, timedelta
+import random
 
 class Prestamo:
 
@@ -10,7 +13,7 @@ class Prestamo:
     __prestamos = 0
 
 
-    def __init__(self, SocioID, IDMaterial, estado = "Vigente"):
+    def __init__(self, EstudianteID, IDMaterial, estado = "Vigente"):
 
         #El ID de los préstamos se crean automáticamente cada vez que se registra un nuevo Prestamo.
         self.__IDPrestamo = self.__generarIDPrestamo()
@@ -18,14 +21,18 @@ class Prestamo:
         #Los préstamos que se realicen se guardan en el diccionario de préstamos
         self.__Prestamos[self.__IDPrestamo] = self
 
-        #Acepta tanto un objeto Socio como un ID de Socio.
-        if isinstance(SocioID, Socio):
-            self.__Socio = SocioID
+        #Acepta tanto un objeto Estudiante como un ID de Estudiante.
+        #isinstance comprueba que EstudianteID sea un instancia de clase de Estudiante.
+        if isinstance(EstudianteID, Estudiante):
+            self.__Estudiante = EstudianteID
         else:
-            #Si es un ID, busca al Socio correspondiente.
-            self.__Socio = Socio.buscarID(SocioID)
-            if self.__Socio is None:
-                raise ValueError(f"No hay un Socio con el ID: {SocioID}")
+            #Si es un ID, busca al Estudiante correspondiente.
+            self.__Estudiante = Estudiante.buscarID(EstudianteID)
+            if self.__Estudiante is None:
+                raise ValueError(f"No hay un Estudiante con el ID: {EstudianteID}")
+
+        if self.__Estudiante.estado == "Suspendido":
+            raise ValueError(f"No se puede realizar el préstamo. El Estudiante {self.__Estudiante.nombre} está Suspendido.")
 
         self.__IDMaterial = IDMaterial
 
@@ -40,29 +47,47 @@ class Prestamo:
         self.__fechaVencimiento = self.__fechaPrestamo + timedelta(days=7)
 
     @property
-    def IDSocio(self):
-        return self.__Socio.IDSocio
+    def IDEstudiante(self):
+        return self.Estudiante.__IDEstudiante
 
     @property
-    def Socio(self):
-        return self.__Socio
+    def get_estudiante(self):
+        return self.__Estudiante
 
     def __generarIDPrestamo(self):
+        num_aleatorio = random.randint(0,9999)
         Prestamo.__prestamos += 1
-        return f"PR{self.__prestamos:04d}"
+        return f"PR{num_aleatorio:04d}{self.__prestamos:01d}"
+
+    #Sistema de Suspension
+    def Sistema_suspencion(self):
+        fecha_actual = datetime.now().date()
+        #Si el prestamo está vigente y la fecha actual es posterior a la fecha de vencimiento
+        if self.__estado == "Vigente" and fecha_actual > self.__fechaVencimiento:
+            #Calculamos los días de retraso
+            dias_retraso = (fecha_actual - self.__fechaVencimiento).days
+
+            #Cambiamos el estado del prestamo a "Vencido"
+            self.__estado = "Vencido"
+
+            if dias_retraso > 0:
+                #Accedemos al estado del Estudiante y los cambiamos a Suspendido
+                self.__Estudiante._Estudiante__estado = "Suspendido"
+                return f"Alerta: El Estudiante {self.__Estudiante.nombre} esta suspendido por un retraso de {dias_retraso} días en la devolución del material"
+        return None
 
     def __str__(self):
-        return f"|Prestamo: {self.__IDPrestamo}|Socio: {self.IDSocio}|Fecha del prestamo: {self.__fechaPrestamo}|Fecha de vencimiento: {self.__fechaVencimiento}|Estado: {self.__estado}|"
+        return f"|Prestamo: {self.__IDPrestamo}|Estudiante: {self.IDEstudiante}|Fecha del prestamo: {self.__fechaPrestamo}|Fecha de vencimiento: {self.__fechaVencimiento}|Estado: {self.__estado}|"
 
-# Crear un socio
-socio = Socio("mogolico1", "Activo", "0902Matheo@gmail.com")
-
-# Crear un préstamo usando el ID del socio
-id_socio = socio.IDSocio
-prestamo1 = Prestamo( id_socio, "M002")
-
-# Obtener toda la información del socio
-print(prestamo1) # Mostrará todos los datos del socio
-
-#Mostramos la información del Socio
-print(socio)
+    @property
+    def estado(self):
+        return self.__estado
+    @property
+    def fechaVencimiento(self):
+        return self.__fechaVencimiento
+    @property
+    def dias_de_retraso(self):
+        fecha_actual = datetime.now().date()
+        if fecha_actual > self.__fechaVencimiento:
+            return (fecha_actual - self.__fechaVencimiento).days
+        return 0
