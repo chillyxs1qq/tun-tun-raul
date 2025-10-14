@@ -7,7 +7,7 @@ class Biblioteca:
         self.__arbolTitulos = arbolTitulos
         self.__arbolAutores = arbolAutores
 
-    def altaMaterial(self):
+'''    def altaMaterial(self):
 
     def altaSocio(self):
         
@@ -29,4 +29,4 @@ class Biblioteca:
 
     def guardarATxt(self):
 
-    def cargarDeTxt(self):
+    def cargarDeTxt(self):'''

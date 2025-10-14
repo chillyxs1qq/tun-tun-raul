@@ -1,6 +1,6 @@
 import json
-from models.Biblioteca.Libro import Libro
-from utils.validation import validar_titulo, validar_autor, validar_anio
+from Sistema_de_Gestion_de_Biblioteca.models.Biblioteca.Libro import Libro
+from Sistema_de_Gestion_de_Biblioteca.utils.validation import validar_titulo, validar_autor, validar_anio
 
 class LibroService:
     def __init__(self):

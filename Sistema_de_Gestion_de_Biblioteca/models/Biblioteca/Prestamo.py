@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from models.usuario import Usuario
+from Sistema_de_Gestion_de_Biblioteca.models.usuario import Usuario
 
 class Prestamo:
     __prestamos = {}  # Diccionario de todos los préstamos

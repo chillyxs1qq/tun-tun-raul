@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
-from models.Biblioteca.Prestamo import Prestamo
-from services.Cola import Cola
+from Sistema_de_Gestion_de_Biblioteca.models.Biblioteca.Prestamo import Prestamo
+from Sistema_de_Gestion_de_Biblioteca.services.Cola import Cola
 
 class PrestamoService:
     def __init__(self, service_usuarios, service_libros):
