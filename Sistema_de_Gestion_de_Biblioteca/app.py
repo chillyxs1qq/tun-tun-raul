@@ -1,6 +1,6 @@
 from services.usuariosService import UsuarioService
 from services.LibroService import LibroService
-from services.PrestamoService import PrestamoService  # 🔹 Nuevo import
+from services.PrestamoService import PrestamoService
 
 # ------------------ MENÚS ------------------
 
@@ -8,7 +8,7 @@ def print_menu():
     print("\n=== Menú Principal ===")
     print("1) Gestión de usuarios")
     print("2) Gestión de libros")
-    print("3) Gestión de préstamos")  # 🔹 Nueva opción
+    print("3) Gestión de préstamos")
     print("0) Salir")
 
 def print_menu_usuarios():
@@ -47,7 +47,7 @@ def print_menu_prestamos():
 def main():
     service_usuarios = UsuarioService()
     service_libros = LibroService()
-    service_prestamos = PrestamoService(service_usuarios, service_libros)  # 🔹 Instancia
+    service_prestamos = PrestamoService(service_usuarios, service_libros)
 
     while True:
         print_menu()

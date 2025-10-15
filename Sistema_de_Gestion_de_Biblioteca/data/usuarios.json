@@ -11,7 +11,7 @@
         "id": 3,
         "nombre": "gey",
         "apellido": "bruno",
-        "email": "hot@bruno12",
+        "email": null,
         "estado": "activo",
         "suspension_hasta": null
     },
@@ -51,7 +51,7 @@
         "id": 8,
         "nombre": "prueba1",
         "apellido": "sebolla",
-        "email": "asdasdasd",
+        "email": null,
         "estado": "activo",
         "suspension_hasta": null
     },
@@ -76,6 +76,14 @@
         "nombre": "queonda",
         "apellido": "bro",
         "email": "queondabro@ouyea.diamantes",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 11,
+        "nombre": "ads",
+        "apellido": "dsasddsa",
+        "email": "adsdasdsad@adsads.assa",
         "estado": "activo",
         "suspension_hasta": null
     }

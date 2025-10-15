@@ -16,5 +16,14 @@
         "fecha_devolucion": "2025-10-17",
         "devuelto": false,
         "sancion": 0
+    },
+    {
+        "id_prestamo": "PRE0003",
+        "id_usuario": 4,
+        "id_libro": "IDMA0002",
+        "fecha_inicio": "2025-10-10",
+        "fecha_devolucion": "2025-10-17",
+        "devuelto": false,
+        "sancion": 0
     }
 ]

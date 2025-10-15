@@ -1,5 +1,5 @@
 import json
-from models.usuario import Usuario
+from Sistema_de_Gestion_de_Biblioteca.models.usuario import Usuario
 from datetime import datetime, timedelta
 
 class UsuarioService:
