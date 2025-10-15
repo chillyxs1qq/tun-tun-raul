@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from models.usuario import Usuario
+from Sistema_de_Gestion_de_Biblioteca.models.usuario import Usuario
 
 class Prestamo:
     __prestamos = {}  # Diccionario de todos los préstamos
@@ -19,18 +19,14 @@ class Prestamo:
         self.fecha_inicio = datetime.now().date()
         self.fecha_devolucion = self.fecha_inicio + timedelta(days=dias_prestamo)
         self.devuelto = False
-        self.sancion = 0
 
-        # Guardar en diccionario
+        #Guardar la información del préstamo en el diccionario, utilizando como clave el ID del préstamo.
         Prestamo.__prestamos[self.id_prestamo] = self
 
     def marcar_devuelto(self):
         self.devuelto = True
         dias_retraso = (datetime.now().date() - self.fecha_devolucion).days
-        if dias_retraso > 0:
-            self.sancion = dias_retraso * 10  # ejemplo: $10 por día de retraso
-        else:
-            self.sancion = 0
+
 
     def calcular_sancion(self):
         if not self.devuelto:
@@ -48,4 +44,5 @@ class Prestamo:
 
     def __str__(self):
         estado = "Devuelto" if self.devuelto else "Vigente"
-        return f"{self.id_prestamo} | Usuario: {self.id_usuario} | Libro: {self.id_libro} | Inicio: {self.fecha_inicio} | Vencimiento: {self.fecha_devolucion} | Estado: {estado} | Sanción: ${self.sancion}"
+        nombre_completo = f"{self.usuario.getNombre()}{self.usuario.getApellido()}"
+        return f"{self.id_prestamo} | Usuario: {nombre_completo} | Libro: {self.id_libro} | Inicio: {self.fecha_inicio} | Vencimiento: {self.fecha_devolucion} | Estado: {estado}"
