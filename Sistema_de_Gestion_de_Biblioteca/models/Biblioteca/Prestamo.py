@@ -19,14 +19,14 @@ class Prestamo:
         self.fecha_inicio = datetime.now().date()
         self.fecha_devolucion = self.fecha_inicio + timedelta(days=dias_prestamo)
         self.devuelto = False
+        self.sancion = 0  # <-- importante
 
-        #Guardar la información del préstamo en el diccionario, utilizando como clave el ID del préstamo.
         Prestamo.__prestamos[self.id_prestamo] = self
 
     def marcar_devuelto(self):
         self.devuelto = True
         dias_retraso = (datetime.now().date() - self.fecha_devolucion).days
-
+        self.sancion = max(dias_retraso * 10, 0)
 
     def calcular_sancion(self):
         if not self.devuelto:
@@ -44,5 +44,5 @@ class Prestamo:
 
     def __str__(self):
         estado = "Devuelto" if self.devuelto else "Vigente"
-        nombre_completo = f"{self.usuario.getNombre()}{self.usuario.getApellido()}"
+        nombre_completo = f"{self.usuario.getNombre()} {self.usuario.getApellido()}"
         return f"{self.id_prestamo} | Usuario: {nombre_completo} | Libro: {self.id_libro} | Inicio: {self.fecha_inicio} | Vencimiento: {self.fecha_devolucion} | Estado: {estado}"

@@ -40,6 +40,7 @@ def print_menu_prestamos():
     print("3) Marcar devolución")
     print("4) Calcular sanción")
     print("5) Ver colas de espera")
+    print("6) Retirarse de la cola de espera")
     print("0) Volver")
 
 # ------------------ PROGRAMA PRINCIPAL ------------------
@@ -63,13 +64,15 @@ def main():
                     nombre = input("Nombre: ").strip()
                     apellido = input("Apellido: ").strip()
                     email = input("Email: ").strip()
-                    id_usuario = service_usuarios.obtener_siguiente_id()
-                    u = service_usuarios.agregar_usuario(id_usuario, nombre, apellido, email)
+                    u = service_usuarios.agregar_usuario(nombre, apellido, email)
                     print("Usuario creado:", u)
 
                 elif opt_u == "2":
-                    for u in service_usuarios.usuarios:
-                        print(u)
+                    if service_usuarios.usuarios:
+                        for u in service_usuarios.usuarios:
+                            print(u)
+                    else:
+                        print("No hay usuarios registrados.")
 
                 elif opt_u == "3":
                     nombre = input("Nombre a buscar: ").strip()
@@ -82,43 +85,58 @@ def main():
                         print("No se encontraron usuarios con ese nombre o parte del nombre.")
 
                 elif opt_u == "4":
-                    id_u = int(input("ID: "))
-                    u = service_usuarios.buscar_usuario_por_id(id_u)
-                    print(u if u else "Usuario no encontrado")
+                    try:
+                        id_u = int(input("ID: "))
+                        u = service_usuarios.buscar_usuario_por_id(id_u)
+                        print(u if u else "Usuario no encontrado")
+                    except ValueError:
+                        print("ID inválido")
 
                 elif opt_u == "5":
-                    id_u = int(input("ID a actualizar: "))
-                    usuario = service_usuarios.buscar_usuario_por_id(id_u)
-                    if usuario:
-                        nombre = input("Nuevo nombre: ")
-                        apellido = input("Nuevo apellido: ")
-                        email = input("Nuevo email: ")
-                        service_usuarios.modificar_usuario(id_u, nombre, apellido, email)
-                        print("Usuario actualizado:", usuario)
-                    else:
-                        print("Usuario no encontrado")
+                    try:
+                        id_u = int(input("ID a actualizar: "))
+                        usuario = service_usuarios.buscar_usuario_por_id(id_u)
+                        if usuario:
+                            nombre = input("Nuevo nombre: ")
+                            apellido = input("Nuevo apellido: ")
+                            email = input("Nuevo email: ")
+                            service_usuarios.modificar_usuario(id_u, nombre, apellido, email)
+                            print("Usuario actualizado:", usuario)
+                        else:
+                            print("Usuario no encontrado")
+                    except ValueError:
+                        print("ID inválido")
 
                 elif opt_u == "6":
-                    id_u = int(input("ID a eliminar: "))
-                    if service_usuarios.eliminar_usuario(id_u):
-                        print("Usuario eliminado")
-                    else:
-                        print("No encontrado")
+                    try:
+                        id_u = int(input("ID a eliminar: "))
+                        if service_usuarios.eliminar_usuario(id_u):
+                            print("Usuario eliminado")
+                        else:
+                            print("No encontrado")
+                    except ValueError:
+                        print("ID inválido")
 
                 elif opt_u == "7":
-                    id_u = int(input("ID a suspender: "))
-                    dias = int(input("Cantidad de días: "))
-                    if service_usuarios.suspender_usuario(id_u, dias):
-                        print("Usuario suspendido")
-                    else:
-                        print("No encontrado")
+                    try:
+                        id_u = int(input("ID a suspender: "))
+                        dias = int(input("Cantidad de días: "))
+                        if service_usuarios.suspender_usuario(id_u, dias):
+                            print("Usuario suspendido")
+                        else:
+                            print("No encontrado o ya suspendido")
+                    except ValueError:
+                        print("Entrada inválida")
 
                 elif opt_u == "8":
-                    id_u = int(input("ID a reactivar: "))
-                    if service_usuarios.reactivar_usuario(id_u):
-                        print("Usuario reactivado")
-                    else:
-                        print("No encontrado o no suspendido")
+                    try:
+                        id_u = int(input("ID a reactivar: "))
+                        if service_usuarios.reactivar_usuario(id_u):
+                            print("Usuario reactivado")
+                        else:
+                            print("No encontrado o no suspendido")
+                    except ValueError:
+                        print("ID inválido")
 
                 elif opt_u == "0":
                     break
@@ -218,12 +236,20 @@ def main():
 
                 elif opt_p == "5":
                     print("\n=== Colas de espera activas ===")
-                    if service_prestamos.cola_espera:
-                        for id_libro, cola in service_prestamos.cola_espera.items():
-                            if not cola.estaVacia():
-                                print(f"Libro {id_libro}: en espera -> {cola.toLista()}")
+                    colas = service_prestamos.ver_colas_de_espera()
+                    if colas:
+                        for titulo, lista_usuarios in colas.items():
+                            print(f"Libro '{titulo}': en espera -> {lista_usuarios}")
                     else:
                         print("No hay colas de espera activas.")
+
+                elif opt_p == "6":
+                    id_usuario = input("ID del usuario: ").strip()
+                    id_libro = input("ID del libro: ").strip()
+                    if service_prestamos.retirar_de_cola(id_usuario, id_libro):
+                        print(f"Usuario {id_usuario} retirado de la cola del libro {id_libro}")
+                    else:
+                        print("Usuario o libro no encontrado en la cola.")
 
                 elif opt_p == "0":
                     break
@@ -231,7 +257,6 @@ def main():
         elif opt == "0":
             print("Saliendo...")
             break
-
 
 if __name__ == "__main__":
     main()

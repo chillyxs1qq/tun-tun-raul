@@ -4,8 +4,8 @@
         "nombre": "jose",
         "apellido": "gonzales",
         "email": "hot@gonzales.com",
-        "estado": "suspendido",
-        "suspension_hasta": "2025-11-02T22:13:57.736563"
+        "estado": "activo",
+        "suspension_hasta": null
     },
     {
         "id": 3,
@@ -72,18 +72,10 @@
         "suspension_hasta": null
     },
     {
-        "id": 10,
-        "nombre": "queonda",
-        "apellido": "bro",
-        "email": "queondabro@ouyea.diamantes",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
         "id": 11,
-        "nombre": "ads",
-        "apellido": "dsasddsa",
-        "email": "adsdasdsad@adsads.assa",
+        "nombre": "Flavio",
+        "apellido": "Ortiz",
+        "email": "flaortiz@gmail.com",
         "estado": "activo",
         "suspension_hasta": null
     }

@@ -1,28 +1,19 @@
 [
     {
         "id_prestamo": "PRE0001",
-        "id_usuario": 3,
+        "id_usuario": "3",
         "id_libro": "IDMA0003",
-        "fecha_inicio": "2025-10-10",
-        "fecha_devolucion": "2025-10-17",
-        "devuelto": true,
+        "fecha_inicio": "2025-10-16",
+        "fecha_devolucion": "2025-10-23",
+        "devuelto": false,
         "sancion": 0
     },
     {
         "id_prestamo": "PRE0002",
         "id_usuario": 4,
-        "id_libro": "IDMA0004",
-        "fecha_inicio": "2025-10-10",
-        "fecha_devolucion": "2025-10-17",
-        "devuelto": false,
-        "sancion": 0
-    },
-    {
-        "id_prestamo": "PRE0003",
-        "id_usuario": 4,
-        "id_libro": "IDMA0002",
-        "fecha_inicio": "2025-10-10",
-        "fecha_devolucion": "2025-10-17",
+        "id_libro": "IDMA0005",
+        "fecha_inicio": "2025-10-16",
+        "fecha_devolucion": "2025-10-23",
         "devuelto": false,
         "sancion": 0
     }

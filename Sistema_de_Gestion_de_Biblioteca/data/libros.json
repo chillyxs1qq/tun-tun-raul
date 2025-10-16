@@ -21,7 +21,7 @@
         "autor": "GONZALES",
         "anio": "2002",
         "genero": "ayuda",
-        "prestamo": "Habilitado"
+        "prestamo": "Inhabilitado"
     },
     {
         "id": "IDMA0004",
@@ -37,7 +37,7 @@
         "autor": "bruno",
         "anio": 2012,
         "genero": "abentura",
-        "prestamo": "Habilitado"
+        "prestamo": "Inhabilitado"
     },
     {
         "id": "IDMA0006",
@@ -45,6 +45,14 @@
         "autor": "Martin Branca",
         "anio": 2004,
         "genero": "Gey",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "IDMA0007",
+        "titulo": "Narnia",
+        "autor": "Bruno Furtado",
+        "anio": 2000,
+        "genero": "Aventura",
         "prestamo": "Habilitado"
     }
 ]
