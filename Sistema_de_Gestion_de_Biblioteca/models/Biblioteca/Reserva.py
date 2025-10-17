@@ -5,7 +5,6 @@ class Reserva:
         self.__idmaterial = 0
         self.__colaSocios = []
 
-
     def encolar(self, idSocio):
         self.__colaSocios.append(idSocio)
 

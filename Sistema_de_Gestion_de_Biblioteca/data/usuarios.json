@@ -1,10 +1,1 @@
-[
-    {
-        "id": 1,
-        "nombre": "Bruno",
-        "apellido": "Furtado",
-        "email": null,
-        "estado": "activo",
-        "suspension_hasta": null
-    }
-]
+[]

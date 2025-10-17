@@ -13,7 +13,7 @@ class Material:
     def __generarIDMa(self):
         return f"{self.__contador}"
 
-    # -------- Getters --------
+    #Llamados:
     def getId(self):
         return self.__id  # <- Esto es lo que faltaba
 
@@ -32,13 +32,12 @@ class Material:
     def getPrestamohabilitado(self):
         return "Habilitado" if self.__prestamohabilitado else "Inhabilitado"
 
-    # -------- Setters --------
+    # Modificador de atributos:
     def setTitulo(self, titulo):
         self.__titulo = titulo
 
     def setAutor(self, autor):
         self.__autor = autor
 
-    # -------- __str__ --------
     def __str__(self):
         return f"[{self.__tipo}] ID: {self.__id}, Título: {self.__titulo}, Autor: {self.__autor}, Año: {self.__anio}, Préstamo: {self.getPrestamohabilitado()}"
