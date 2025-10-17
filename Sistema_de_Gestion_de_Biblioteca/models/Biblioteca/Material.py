@@ -11,7 +11,7 @@ class Material:
         self.__prestamohabilitado = True
 
     def __generarIDMa(self):
-        return f"IDMA{self.__contador:04d}"
+        return f"{self.__contador}"
 
     # -------- Getters --------
     def getId(self):

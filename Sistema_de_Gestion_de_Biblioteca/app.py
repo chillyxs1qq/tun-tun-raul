@@ -38,9 +38,8 @@ def print_menu_prestamos():
     print("1) Crear préstamo")
     print("2) Listar préstamos")
     print("3) Marcar devolución")
-    print("4) Calcular sanción")
-    print("5) Ver colas de espera")
-    print("6) Retirarse de la cola de espera")
+    print("4) Ver colas de espera")
+    print("5) Retirarse de la cola de espera")
     print("0) Volver")
 
 # ------------------ PROGRAMA PRINCIPAL ------------------
@@ -231,10 +230,6 @@ def main():
                     print(service_prestamos.marcar_devuelto(id_prestamo))
 
                 elif opt_p == "4":
-                    id_prestamo = input("ID del préstamo: ").strip()
-                    print(service_prestamos.calcular_sancion(id_prestamo))
-
-                elif opt_p == "5":
                     print("\n=== Colas de espera activas ===")
                     colas = service_prestamos.ver_colas_de_espera()
                     if colas:
@@ -243,7 +238,7 @@ def main():
                     else:
                         print("No hay colas de espera activas.")
 
-                elif opt_p == "6":
+                elif opt_p == "5":
                     id_usuario = input("ID del usuario: ").strip()
                     id_libro = input("ID del libro: ").strip()
                     if service_prestamos.retirar_de_cola(id_usuario, id_libro):

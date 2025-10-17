@@ -1,9 +1,7 @@
 # utils/validation.py
 import re
 
-# ---------------------
 # Validación de correo
-# ---------------------
 def validar_correo(correo):
     """
     Valida que el correo tenga formato válido y dominios comunes.
@@ -14,9 +12,7 @@ def validar_correo(correo):
         raise ValueError("Correo inválido. Debe tener formato correcto y dominio .com/.net/.org")
     return correo
 
-# ---------------------
 # Validación de strings
-# ---------------------
 def validar_titulo(titulo):
     if not titulo or not titulo.strip():
         raise ValueError("Título vacío")
@@ -37,9 +33,7 @@ def validar_apellido(apellido):
         raise ValueError("Apellido vacío")
     return apellido.strip()
 
-# ---------------------
 # Validación de año
-# ---------------------
 def validar_anio(anio):
     try:
         anio_int = int(anio)

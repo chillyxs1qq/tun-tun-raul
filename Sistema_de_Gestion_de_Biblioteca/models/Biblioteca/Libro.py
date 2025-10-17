@@ -6,7 +6,7 @@ class Libro:
 
     def __init__(self, titulo, autor, anio, genero=None):
         Libro.__contador += 1
-        self.id = f"IDMA{Libro.__contador:04d}"
+        self.id = str(Libro.__contador)
         self.titulo = titulo
         self.autor = autor
         self.anio = anio
@@ -14,7 +14,7 @@ class Libro:
         self.prestamohabilitado = True
         self.cola_espera = Cola()  # Cola de usuarios esperando el libro
 
-    # --- getters ---
+    #Metodos para mostrar los atributos:
     def getId(self):
         return self.id
 
@@ -36,7 +36,7 @@ class Libro:
     def verCola(self):
         return self.cola_espera.toLista()
 
-    # --- setters ---
+    #Modificadores Atributos:
     def setTitulo(self, nuevo_titulo):
         self.titulo = nuevo_titulo
 
@@ -52,7 +52,7 @@ class Libro:
     def setPrestamohabilitado(self, estado):
         self.prestamohabilitado = estado
 
-    # --- métodos de cola ---
+    #Metodos de cola:
     def encolar_usuario(self, id_usuario):
         if not self.cola_espera.contiene(id_usuario):
             self.cola_espera.encolar(id_usuario)
@@ -72,7 +72,7 @@ class Libro:
             return True
         return False
 
-    # --- JSON ---
+    # Metodo para añadirlo al JSON
     def to_dict(self):
         return {
             "id": self.id,
@@ -89,6 +89,5 @@ class Libro:
         for uid in lista_ids:
             self.cola_espera.encolar(uid)
 
-    # --- string ---
     def __str__(self):
         return f"[Libro] ID: {self.id}, Título: {self.titulo}, Autor: {self.autor}, Año: {self.anio}, Género: {self.genero}, Préstamo: {self.getPrestamohabilitado()}, En espera: {self.verCola()}"

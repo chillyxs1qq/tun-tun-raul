@@ -54,12 +54,6 @@ class PrestamoService:
                 return mensaje
         return False
 
-    def calcular_sancion(self, id_prestamo):
-        prestamo = next((p for p in self.prestamos if p.id_prestamo == id_prestamo), None)
-        if prestamo:
-            return prestamo.calcular_sancion()
-        return None
-
     def ver_colas_de_espera(self):
         colas = {}
         for libro in self.libros.listar_libros():
@@ -92,6 +86,8 @@ class PrestamoService:
             with open("data/prestamos.json", "r", encoding="utf-8") as f:
                 lista_dicts = json.load(f)
                 for d in lista_dicts:
+                    if not self.usuarios.buscar_usuario_por_id(int(d["id_usuario"])):
+                        continue
                     dias = (datetime.fromisoformat(d["fecha_devolucion"]).date() - datetime.fromisoformat(d["fecha_inicio"]).date()).days
                     prestamo = Prestamo(d["id_usuario"], d["id_libro"], dias)
                     prestamo.id_prestamo = d["id_prestamo"]

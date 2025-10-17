@@ -8,7 +8,6 @@ class LibroService:
         self.cargar_desde_json()
 
     # --- CRUD ---
-
     def agregar_libro(self, titulo, autor, anio, genero=None):
         titulo = validar_titulo(titulo)
         autor = validar_autor(autor)
@@ -38,9 +37,9 @@ class LibroService:
         return False
 
     def buscar_por_id(self, id_libro):
-        id_libro = id_libro.upper()
+        id_libro = str(id_libro).strip()
         for l in self.libros:
-            if l.getId().upper() == id_libro:
+            if str(l.getId()) == id_libro:
                 return l
         return None
 

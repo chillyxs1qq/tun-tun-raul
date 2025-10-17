@@ -30,7 +30,7 @@ class Usuario:
         # Guardar en diccionario
         Usuario.__usuarios[self.__id] = self
 
-    # --- GETTERS / SETTERS ---
+    #Modificadores de los atributos de los usuarios:
     def getId(self):
         return self.__id
 
@@ -67,7 +67,7 @@ class Usuario:
     def setSuspensionHasta(self, fecha):
         self.__suspension_hasta = fecha
 
-    # --- MÉTODOS DE CLASE ---
+    # Metodos de clase:
     @classmethod
     def buscar_por_id(cls, id_usuario):
         return cls.__usuarios.get(int(id_usuario))
@@ -81,13 +81,12 @@ class Usuario:
         """Actualizar el contador si se cargan IDs desde JSON"""
         cls.__contador = max(cls.__contador, valor)
 
-    # --- VALIDACIÓN DE EMAIL ---
+    # Establece un formato fijo para la transcripción de email, en caso de que quieran ponerlo.
     @staticmethod
     def __email_valido(email):
         regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         return bool(re.match(regex, email))
 
-    # --- REPRESENTACIÓN ---
     def __str__(self):
         email_str = f"Email: {self.__email}" if self.__email else ""
         if self.__estado == "activo":

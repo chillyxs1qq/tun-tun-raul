@@ -1,81 +1,9 @@
 [
     {
-        "id": 2,
-        "nombre": "jose",
-        "apellido": "gonzales",
-        "email": "hot@gonzales.com",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 3,
-        "nombre": "gey",
-        "apellido": "bruno",
+        "id": 1,
+        "nombre": "Bruno",
+        "apellido": "Furtado",
         "email": null,
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 4,
-        "nombre": "don pepe sebolla",
-        "apellido": "los sebollas",
-        "email": "sebolla@yahoo.com",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 5,
-        "nombre": "Gonza",
-        "apellido": "Valdez",
-        "email": "mariososa@yahoo.com",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 6,
-        "nombre": "Martin",
-        "apellido": "Branca",
-        "email": "ladeepweb@hot.com",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 7,
-        "nombre": "nemesis",
-        "apellido": "gularte",
-        "email": "asdad@asdasd.net",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 8,
-        "nombre": "prueba1",
-        "apellido": "sebolla",
-        "email": null,
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 9,
-        "nombre": "leo",
-        "apellido": "messi",
-        "email": "gordofobia@yahoo.com",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 10,
-        "nombre": "MOGOLICO1",
-        "apellido": "ayer",
-        "email": "joacaba@yahoo.net",
-        "estado": "activo",
-        "suspension_hasta": null
-    },
-    {
-        "id": 11,
-        "nombre": "Flavio",
-        "apellido": "Ortiz",
-        "email": "flaortiz@gmail.com",
         "estado": "activo",
         "suspension_hasta": null
     }

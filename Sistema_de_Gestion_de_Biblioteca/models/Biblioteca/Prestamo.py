@@ -28,12 +28,6 @@ class Prestamo:
         dias_retraso = (datetime.now().date() - self.fecha_devolucion).days
         self.sancion = max(dias_retraso * 10, 0)
 
-    def calcular_sancion(self):
-        if not self.devuelto:
-            dias_retraso = (datetime.now().date() - self.fecha_devolucion).days
-            return max(dias_retraso * 10, 0)
-        return self.sancion
-
     @classmethod
     def obtener_todos(cls):
         return list(cls.__prestamos.values())
