@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "id": 1,
+        "nombre": "Jose",
+        "apellido": "Gonzalez",
+        "email": "josegonzalez@gmail.com",
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 2,
+        "nombre": "Bruno",
+        "apellido": "Furtado",
+        "email": null,
+        "estado": "activo",
+        "suspension_hasta": null
+    },
+    {
+        "id": 3,
+        "nombre": "Joaquin",
+        "apellido": "Barreiro",
+        "email": null,
+        "estado": "activo",
+        "suspension_hasta": null
+    }
+]

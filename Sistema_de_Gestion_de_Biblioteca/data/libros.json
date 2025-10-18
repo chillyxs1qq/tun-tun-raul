@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "id": "1",
+        "titulo": "1998",
+        "autor": "Yo",
+        "anio": 2016,
+        "genero": "Terror",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "2",
+        "titulo": "Pocoyo",
+        "autor": "Pocoty",
+        "anio": 2000,
+        "genero": "Aventura",
+        "prestamo": "Habilitado"
+    },
+    {
+        "id": "3",
+        "titulo": "Luna de Pluton",
+        "autor": "Dross",
+        "anio": 2015,
+        "genero": "Aventura",
+        "prestamo": "Habilitado"
+    }
+]

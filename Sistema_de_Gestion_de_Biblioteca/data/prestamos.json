@@ -4,26 +4,8 @@
         "id_usuario": 1,
         "id_libro": "1",
         "fecha_inicio": "2025-10-17",
-        "fecha_devolucion": "2025-10-18",
+        "fecha_devolucion": "2025-10-24",
         "devuelto": true,
-        "sancion": 0
-    },
-    {
-        "id_prestamo": "PRE0002",
-        "id_usuario": 1,
-        "id_libro": "1",
-        "fecha_inicio": "2025-10-17",
-        "fecha_devolucion": "2025-10-18",
-        "devuelto": true,
-        "sancion": 0
-    },
-    {
-        "id_prestamo": "PRE0003",
-        "id_usuario": 1,
-        "id_libro": "1",
-        "fecha_inicio": "2025-10-17",
-        "fecha_devolucion": "2025-10-18",
-        "devuelto": false,
         "sancion": 0
     }
 ]
